@@ -1,0 +1,116 @@
+package com.example.bluetoothtest;
+
+import java.util.Set;
+
+import android.os.Bundle;
+import android.app.Activity;
+import android.bluetooth.BluetoothAdapter;
+import android.bluetooth.BluetoothDevice;
+import android.content.BroadcastReceiver;
+import android.content.Context;
+import android.content.Intent;
+import android.content.IntentFilter;
+import android.view.Menu;
+import android.view.View;
+import android.widget.ArrayAdapter;
+import android.widget.EditText;
+
+public class MainActivity extends Activity {
+
+	public final static String EXTRA_MESSAGE = "com.example.bluetoothtest.MESSAGE";
+	public int REQUEST_ENABLE_BT = 52;
+	BluetoothAdapter myBluetoothAdapter;
+	private Set<BluetoothDevice> pairedDevices;
+	ArrayAdapter<String> myArrayAdapter;
+
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.activity_main);
+	}
+
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+		// Inflate the menu; this adds items to the action bar if it is present.
+		getMenuInflater().inflate(R.menu.main, menu);
+		return true;
+	}
+
+	/** Called when the user clicks the Send button */
+	public void sendMessage(View view) {
+		Intent intent = new Intent(this, DisplayMessageActivity.class);
+		EditText editText = (EditText) findViewById(R.id.edit_message);
+		String message = editText.getText().toString();
+
+
+		myBluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
+		if (myBluetoothAdapter == null) {
+			message = "NO BLUETOOTH YO!!";
+		}
+
+		if (!myBluetoothAdapter.isEnabled()) {
+			Intent enableBtIntent = new Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE);
+			startActivityForResult(enableBtIntent, REQUEST_ENABLE_BT);
+		}
+
+		intent.putExtra(EXTRA_MESSAGE, message);
+		//startActivity(intent);
+	}
+
+	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+		if (requestCode == REQUEST_ENABLE_BT) {
+			if (myBluetoothAdapter.isEnabled()) {
+				continueBluetoothTest();
+			}
+		}
+	}
+
+	public void continueBluetoothTest(){
+		// get paired devices
+		/*pairedDevices = myBluetoothAdapter.getBondedDevices();
+
+		// put it's one to the adapter
+		for(BluetoothDevice device : pairedDevices)
+			myArrayAdapter.add(device.getName()+ "\n" + device.getAddress());*/
+
+		if (myBluetoothAdapter.isDiscovering()) {
+			// the button is pressed when it discovers, so cancel the discovery
+			myBluetoothAdapter.cancelDiscovery();
+		}
+		else {
+			myArrayAdapter.clear();
+			myBluetoothAdapter.startDiscovery();
+
+			registerReceiver(myReceiver, new IntentFilter(BluetoothDevice.ACTION_FOUND));
+		}
+
+	}
+
+
+
+	private final BroadcastReceiver myReceiver = new BroadcastReceiver() {
+		public void onReceive(Context context, Intent intent) {
+			String action = intent.getAction();
+			// When discovery finds a device
+			if (BluetoothDevice.ACTION_FOUND.equals(action)) {
+				// Get the BluetoothDevice object from the Intent
+				BluetoothDevice device = intent.getParcelableExtra(BluetoothDevice.EXTRA_DEVICE);
+				// Add the name and address to an array adapter to show in a ListView
+				myArrayAdapter.add(device.getName() + "\n" + device.getAddress());
+				//myArrayAdapter.notifyDataSetChanged();
+			}
+		}
+	};
+
+
+	@Override
+	protected void onDestroy() {
+		// TODO Auto-generated method stub
+		super.onDestroy();
+		unregisterReceiver(myReceiver);
+	}
+
+
+
+
+}
