@@ -25,6 +25,7 @@ import android.widget.EditText;
 
 public class MainActivity extends Activity {
 
+	/*Test push */
 	public final static String EXTRA_MESSAGE = "com.example.bluetoothtest.MESSAGE";
 	private Set<BluetoothDevice> pairedDevices;
 	private String deviceInfo = "";
