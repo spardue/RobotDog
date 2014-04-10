@@ -1,25 +1,19 @@
-#include <SoftwareSerial.h>
 
-int enable1Pin = 11;
-int in1Pin = 10;
-int in2Pin = 9;
+#include <Servo.h>
 
-
+Servo servo1a;
+Servo servo1b;
 int state;
-int flag=0;        //makes sure that the serial only prints once the state
-int stateStop=0;
-const int ledPin = 13;
+int flag = 0;
 
-SoftwareSerial mySerial(7, 8); //RX TX
+
+HardwareSerial mySerial = HardwareSerial();
+
 
 void setup() {
-    // sets the pins as outputs:
-    pinMode(in1Pin, OUTPUT);
-    pinMode(in2Pin, OUTPUT);
-    pinMode(enable1Pin, OUTPUT);
-   
-    // sets enable1Pin and enable2Pin high so that motor can turn on:
-    digitalWrite(enable1Pin, HIGH);
+    servo1a.attach(21);
+    servo1b.attach(20);
+
     // initialize serial communication at 9600 bits per second:
     Serial.begin(9600);
     mySerial.begin(9600);
@@ -28,13 +22,23 @@ void setup() {
 void loop() {
     //if some date is sent, reads it and saves in state
     if(mySerial.available() > 0){     
-      state = mySerial.read();   
+      state = mySerial.read();
+      Serial.println("STOP!");   
       flag=0;
     }
     // if the state is '1' the DC motor will go forward
     if (state == '1') {
-        digitalWrite(in1Pin, HIGH);
-        digitalWrite(in2Pin, LOW); 
+         /* servo1a.write(90); 
+            servo1b.write(90);
+            delay(600);
+          */
+      servo1a.write(120);
+      servo1b.write(120);
+      delay(300);
+  
+      servo1a.write(60);
+      servo1b.write(60);
+      delay(300); 
         
         if(flag == 0){
           Serial.println("Go Forward!");
@@ -44,8 +48,7 @@ void loop() {
     }
     
     else if (state == '2') {
-        digitalWrite(in1Pin, LOW);
-        digitalWrite(in2Pin, HIGH);
+
         
         if(flag == 0){
           Serial.println("GO BACK");
@@ -55,13 +58,12 @@ void loop() {
     
     // if the state is '3' the motor will Stop
     else if (state == '3') {
-        digitalWrite(in1Pin, LOW);
-        digitalWrite(in2Pin, LOW);
+        servo1a.write(90);
+        servo1b.write(90);
         if(flag == 0){
           Serial.println("STOP!");
           flag=1;
         }
-        stateStop=0;
     }
     //For debugging purpose
     //Serial.println(state);
