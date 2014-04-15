@@ -44,14 +44,9 @@ void loop() {
  
     // if the state is '0', stop
     if (state == '0') {
-        servo1.write(90);
-        servo2.write(90);
-        servo3.write(90);
-        servo4.write(90);
-        servo1b.write(90);
-        servo2b.write(90);
-        servo3b.write(90);
-        servo4b.write(90);
+        neutralize();
+        halt();
+        
         
         if(flag == 0){
           Serial.println("STOP!");
@@ -62,8 +57,8 @@ void loop() {
     // if the state is '1', go forward
     else if (state == '1') {
       
-      
-      forward();
+      neutralize();
+      forwards();
       
       
    
@@ -75,8 +70,8 @@ void loop() {
     }
     
     else if (state == '2') {
-
-        
+        neutralize();
+        backwards();
         if(flag == 0){
           Serial.println("GO BACK");
           flag=1;
@@ -124,7 +119,7 @@ void loop() {
       servo1b.write(130);
       servo3b.write(130);
       servo4b.write(130);
-      forward();
+      forwards();
       
       if(flag == 0){
           Serial.println("GO RIGHT");
@@ -133,7 +128,7 @@ void loop() {
     }
     // if the state is '5', bow
     else if (state == '5') {
-
+      neutralize();
       servo1.write(30);     
       servo2.write(150);
 
@@ -144,18 +139,67 @@ void loop() {
 
     }
     else if (state == '6') {
-
-      run();
-
+      turn();
         if(flag == 0){
-          Serial.println("RUNNNN!!!");
+          Serial.println("turn");
           flag=1;
         }
-
+    }
+    else if (state == '7') {
+      dance();
+        if(flag == 0){
+          Serial.println("DANCE DOG DANCE! DANCE LIKE YOUVE NEVER DANCED BEFORE");
+          flag=1;
+        }
+    }
+    else if (state == '8') {
+      puppyStomp();
+        if(flag == 0){
+          Serial.println("RAWRR");
+          flag=1;
+        }
+    }
+    else if (state == '9') {
+      beg();
+        if(flag == 0){
+          Serial.println("Who's a Good Puppy?");
+          flag=1;
+        }
+    }
+    
+    else if (state == '10') {
+      bouncyWalk();
+        if(flag == 0){
+          Serial.println("weeeeee");
+          flag=1;
+        }
     }
 }
+void forwards(){
+      servo3.write(60);
+      servo4.write(100);
+ 
+      delay(10);
+      servo3.write(120);
+      servo4.write(60);
+    
+      
+      delay(500);
+      servo3.write(90);
+      servo4.write(90);
+      
+      servo1.write(60);
+      servo2.write(120);
+      delay(10);
+      servo1.write(120);
+      servo2.write(60);
+      delay(500);
+      servo1.write(90);
+      servo2.write(90);   
+}
 
-void forward(){
+
+void backwards(){
       servo1.write(60);
       servo2.write(100);
  
@@ -175,12 +219,10 @@ void forward(){
       servo4.write(60);
       delay(500);
       servo3.write(90);
-      servo4.write(90);
-
-     
+      servo4.write(90);   
 }
 
-void run(){
+void turn(){
       servo1.write(60);
       servo2.write(100);
       servo3.write(120);
@@ -190,7 +232,116 @@ void run(){
       servo2.write(60);
       servo3.write(90);
       servo4.write(90);
-      
-      
-      
+      delay(10);
+          
+}
+
+void dance(){
+  servo1.write(60);
+  servo1b.write(120);
+  
+  servo2.write(100);
+  servo2b.write(60);
+  
+  servo3.write(100);
+  servo3b.write(60);
+  
+  servo4.write(60);
+  servo4b.write(120);
+  
+  delay(10);
+  servo1.write(120);
+  servo1b.write(60);
+  
+  servo2.write(60);
+  servo2b.write(120);
+  
+  servo3.write(60);
+  servo3b.write(120);
+  
+  servo4.write(120);
+  servo4b.write(60);
+  
+  
+  delay(10);
+}
+
+//be careful with this one. prone to tipping
+void puppyStomp(){
+  /*
+  servo1.write(60);
+  servo2.write(120);
+  delay(10);
+  
+  servo3.write(60);
+  servo4.write(120);
+  
+  servo1.write(120);
+  servo2.write(60);
+  delay(10); 
+  servo3.write(120);
+  servo4.write(60);
+  */
+  servo1.write(60);
+  servo2.write(120);
+  servo3.write(120);
+  servo4.write(60);
+  delay(10);
+  servo1.write(120);
+  servo2.write(60);
+  servo3.write(60);
+  servo4.write(120);
+  delay(10);
+}
+
+void bouncyWalk(){
+  servo1.write(60);
+  servo2.write(120);
+  servo3.write(60);
+  servo4.write(120);
+  delay(10);
+  servo1.write(120);
+  servo2.write(60);
+  servo3.write(120);
+  servo4.write(60);
+  delay(10);
+  
+  
+  
+}
+
+
+void beg(){
+  servo3.write(30);
+  servo4.write(150);
+  
+  delay(1000);
+  
+  delay(1000);
+  servo1.write(0);
+  servo2.write(180);
+  delay(1000);
+  servo3.write(150);
+  servo4.write(30);
+  
+  state = 0;
+  halt();
+}
+
+void neutralize(){
+  servo1b.write(90);
+  servo2b.write(90);
+  servo3b.write(90);
+  servo4b.write(90);
+}
+
+void halt(){
+  servo1.write(90);
+  servo2.write(90);
+  servo3.write(90);
+  servo4.write(90);
+  servo1b.write(90);
+  servo2b.write(90);
+  servo3b.write(90);
+  servo4b.write(90);
 }
