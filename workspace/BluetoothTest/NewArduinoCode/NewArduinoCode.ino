@@ -58,7 +58,7 @@ void loop() {
     else if (state == '1') {
       
       neutralize();
-      forwards();
+      puppyStomp();
       
       
    
@@ -115,7 +115,7 @@ void loop() {
         }
     }
     else if(state == '4') {
-      
+      //NEEDS TO BE, IMPLEMENTED REVERSE 3 TO MAKE IT GO RIGHT
       servo1b.write(130);
       servo3b.write(130);
       servo4b.write(130);
@@ -141,6 +141,7 @@ void loop() {
     else if (state == '6') {
       turn();
         if(flag == 0){
+          //DOESNT DO ANYTHING
           Serial.println("turn");
           flag=1;
         }
