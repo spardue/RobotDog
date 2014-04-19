@@ -4,9 +4,15 @@ import android.os.Bundle;
 import android.app.Activity;
 import android.content.Intent;
 import android.view.Menu;
+import android.widget.Button;
 import android.widget.TextView;
 
 public class DisplayMessageActivity extends Activity {
+	
+	private Button left;
+	private Button right;
+	private Button forwards;
+	private Button backwards;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {

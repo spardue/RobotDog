@@ -1,20 +1,66 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res/com.example.bluetoothtest"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="horizontal"
-    >
-	
-    <EditText android:id="@+id/edit_message"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:hint="@string/edit_message" />
+    android:orientation="vertical"
+    tools:ignore="UnusedNamespace" >
 
-    
-    <Button
-	    android:layout_width="wrap_content"
-	    android:layout_height="wrap_content"
-	    android:text="@string/button_send"
-	    android:onClick="sendMessage" />
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="206dp"
+        tools:ignore="UselessParent" >
+
+        <Button
+            android:id="@+id/left"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="21dp"
+            android:text="@string/left"
+            tools:ignore="HardcodedText" />
+
+        <Button
+            android:id="@+id/right"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="16dp"
+            android:text="Right"
+            tools:ignore="HardcodedText" />
+
+        <Button
+            android:id="@+id/forwards"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:text="Forward"
+            tools:ignore="HardcodedText" />
+
+        <Button
+            android:id="@+id/stop"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@+id/right"
+            android:layout_alignBottom="@+id/right"
+            android:layout_alignLeft="@+id/forwards"
+            android:layout_alignRight="@+id/forwards"
+            android:text="Stop"
+            tools:ignore="HardcodedText" />
+
+        <Button
+            android:id="@+id/backwards"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/stop"
+            android:layout_alignParentBottom="true"
+            android:layout_alignRight="@+id/stop"
+            android:text="Back"
+            tools:ignore="HardcodedText" />
+
+    </RelativeLayout>
 
 </LinearLayout>

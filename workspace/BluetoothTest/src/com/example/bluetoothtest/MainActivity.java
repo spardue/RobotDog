@@ -20,12 +20,14 @@ import android.content.IntentFilter;
 import android.util.Log;
 import android.view.Menu;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.EditText;
 
 public class MainActivity extends Activity {
 
-	/*Test push */
+	/*Test push*/
 	public final static String EXTRA_MESSAGE = "com.example.bluetoothtest.MESSAGE";
 	private Set<BluetoothDevice> pairedDevices;
 	private String deviceInfo = "";
@@ -35,6 +37,25 @@ public class MainActivity extends Activity {
 	private BluetoothAdapter btAdapter = null;
 	private BluetoothSocket btSocket = null;
 	private OutputStream outStream = null;
+	
+	private Button stopButton;
+	private Button forwardButton;
+	private Button backButton;
+	private Button leftButton;
+	private Button rightButton;
+	
+	/**
+	 * Next lines are movement codes intended for the Arduino
+	 */
+	public final String STOP = "0";
+	public final String FORWARD = "1";
+	public final String BACKWARD = "2";
+	public final String LEFT = "3";
+	public final String RIGHT = "4";
+	/**
+	 * end arduino control codes
+	 */
+	
 
 	// Well known SPP UUID
 	private static final UUID MY_UUID =
@@ -44,6 +65,44 @@ public class MainActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
+		
+		
+		
+		stopButton = (Button) findViewById(R.id.stop);
+		stopButton.setOnClickListener(new OnClickListener() {
+			public void onClick(View v){
+				sendData(STOP);
+			}
+		});
+		
+		forwardButton = (Button) findViewById(R.id.forwards);
+		forwardButton.setOnClickListener(new OnClickListener() {
+			public void onClick(View v){
+				sendData(FORWARD);
+			}
+		});
+		
+		backButton = (Button) findViewById(R.id.backwards);
+		backButton.setOnClickListener(new OnClickListener() {
+			public void onClick(View v){
+				sendData(BACKWARD);
+			}
+		});
+		
+		leftButton = (Button) findViewById(R.id.left);
+		leftButton.setOnClickListener(new OnClickListener() {
+			public void onClick(View v){
+				sendData(LEFT);
+			}
+		});
+		
+		rightButton = (Button) findViewById(R.id.right);
+		rightButton.setOnClickListener(new OnClickListener() {
+			public void onClick(View v){
+				sendData(RIGHT);
+			}
+		});
+		
 		
 		btAdapter = BluetoothAdapter.getDefaultAdapter();
 	}
@@ -56,6 +115,7 @@ public class MainActivity extends Activity {
 	}
 
 	/** Called when the user clicks the Send button */
+	/**
 	public void sendMessage(View view) {
 		//Intent newIntent = new Intent(this, DisplayMessageActivity.class);
 		EditText editText = (EditText) findViewById(R.id.edit_message);
@@ -64,6 +124,7 @@ public class MainActivity extends Activity {
 
 		sendData(message);
 	}
+	*/
 
 	/*protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 		if (requestCode == REQUEST_ENABLE_BT) {
