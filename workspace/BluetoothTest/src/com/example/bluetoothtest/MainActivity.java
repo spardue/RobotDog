@@ -106,6 +106,7 @@ public class MainActivity extends Activity {
 				sendData(RIGHT);
 			}
 		});
+<<<<<<< HEAD
 		
 		sitButton = (Button) findViewById(R.id.sit);
 		sitButton.setOnClickListener(new OnClickListener() {
@@ -122,6 +123,9 @@ public class MainActivity extends Activity {
 		});
 		
 		
+=======
+				
+>>>>>>> 2ee5bc0986a3443964a02d54ab49134027620d47
 		btAdapter = BluetoothAdapter.getDefaultAdapter();
 	}
 
@@ -133,7 +137,7 @@ public class MainActivity extends Activity {
 	}
 
 	/** Called when the user clicks the Send button */
-	/**
+	
 	public void sendMessage(View view) {
 		//Intent newIntent = new Intent(this, DisplayMessageActivity.class);
 		EditText editText = (EditText) findViewById(R.id.edit_message);
@@ -142,7 +146,7 @@ public class MainActivity extends Activity {
 
 		sendData(message);
 	}
-	*/
+	
 
 	/*protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 		if (requestCode == REQUEST_ENABLE_BT) {

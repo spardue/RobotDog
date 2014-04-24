@@ -41,11 +41,11 @@ void forward() {
 }
 
 void left() {
-      servo1.write(120);
-      servo4.write(60);
+      servo1.write(150);
+      servo4.write(30);
       
-      servo2.write(120);
-      servo3.write(60);
+      servo2.write(150);
+      servo3.write(30);
       
       delay(300);
       
@@ -55,13 +55,13 @@ void left() {
       servo2.write(90);
       servo3.write(90);
       
-      delay(300);
+      delay(150);
       
-      servo1.write(60);
-      servo4.write(120);
+      servo1.write(30);
+      servo4.write(150);
       
-      servo2.write(60);
-      servo3.write(120);
+      servo2.write(30);
+      servo3.write(150);
       
       delay(300);
       
@@ -73,35 +73,42 @@ void left() {
 }
 
 void right() {
-      servo1.write(60);
-      servo4.write(60);
+  
+      servo3.write(1500);
+      servo2.write(30);
+      servo4.write(150);
+      servo1.write(30);
       
-      servo2.write(120);
-      servo3.write(120);
+      
+      
       
       delay(300);
-      
-      servo1.write(90);
-      servo4.write(90);
-      
-      servo2.write(90);
       servo3.write(90);
-      
-      delay(300);
-      
-      servo1.write(60);
-      servo4.write(60);
-      
-      servo2.write(60);
-      servo3.write(60);
-      
-      delay(300);
-      
-      servo1.write(90);
-      servo4.write(90);
-      
       servo2.write(90);
+      
+      servo4.write(90);
+      servo1.write(90);
+      
+      
+      
+      
+      delay(150);
+      servo3.write(30);
+      servo2.write(150);
+      servo4.write(30);
+      servo1.write(150);
+      
+      
+      
+      
+      delay(300);
       servo3.write(90);
+      servo2.write(90);
+      servo4.write(90);
+      servo1.write(90);
+      
+      
+      
 }
 
 
