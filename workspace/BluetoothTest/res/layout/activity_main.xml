@@ -60,6 +60,32 @@
             android:layout_alignRight="@+id/stop"
             android:text="Back"
             tools:ignore="HardcodedText" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="0.75" >
+
+        <Button
+            android:id="@+id/sit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginLeft="42dp"
+            android:layout_marginTop="66dp"
+            android:text="Sit" />
+
+        <Button
+            android:id="@+id/bow"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@+id/sit"
+            android:layout_alignBottom="@+id/sit"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="60dp"
+            android:text="Bow" />
 
     </RelativeLayout>
 

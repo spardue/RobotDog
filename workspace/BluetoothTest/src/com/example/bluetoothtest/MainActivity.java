@@ -43,6 +43,8 @@ public class MainActivity extends Activity {
 	private Button backButton;
 	private Button leftButton;
 	private Button rightButton;
+	private Button sitButton;
+	private Button bowButton;
 	
 	/**
 	 * Next lines are movement codes intended for the Arduino
@@ -51,7 +53,9 @@ public class MainActivity extends Activity {
 	public final String FORWARD = "1";
 	public final String BACKWARD = "2";
 	public final String LEFT = "3";
-	public final String RIGHT = "4";
+	public final String RIGHT = "7";
+	public final String SIT = "9";
+	public final String BOW = "5";
 	/**
 	 * end arduino control codes
 	 */
@@ -100,6 +104,20 @@ public class MainActivity extends Activity {
 		rightButton.setOnClickListener(new OnClickListener() {
 			public void onClick(View v){
 				sendData(RIGHT);
+			}
+		});
+		
+		sitButton = (Button) findViewById(R.id.sit);
+		sitButton.setOnClickListener(new OnClickListener() {
+			public void onClick(View v){
+				sendData(SIT);
+			}
+		});
+		
+		sitButton = (Button) findViewById(R.id.bow);
+		sitButton.setOnClickListener(new OnClickListener() {
+			public void onClick(View v){
+				sendData(BOW);
 			}
 		});
 		
